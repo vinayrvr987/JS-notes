@@ -149,3 +149,50 @@ function proceedToPayment(orderId) {
 function showSummaryInfo(paymentInfo) {
     console.log("this is your summary");
 }
+
+// ----------------------
+// ASYNC / AWAIT
+// ----------------------
+
+const p1 = new Promise((resolve) => {
+    setTimeout(() => resolve("p1 promise resolved"), 5000);
+    console.log("Hello world in promise p1");
+});
+
+const p2 = new Promise((resolve) => {
+    setTimeout(() => resolve("p2 promise resolved"), 7000);
+    console.log("Hello world in promise p2");
+});
+
+async function random() {
+    console.log("Starting random");
+    const data = await p1;
+    console.log(data);
+    console.log("Hello world after await 1");
+
+    const data2 = await p2;
+    console.log(data2);
+    console.log("Hello world after await 2 ");
+}
+
+
+random();
+
+p1.then((res) => console.log(res));
+
+p2.then((res) => console.log(res));
+
+// ------------------------------
+// API fetch using ASYNC / AWAIT
+// ------------------------------
+
+API_URI = 'https://jsonplaceholder.typicode.com/todos/1/'
+
+async function apiFetchData(API_URI) {
+    const response = await fetch(API_URI);
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+}
+
+apiFetchData(API_URI)
