@@ -95,3 +95,57 @@ const randomtext = 'Vinay';
 const greeting = `Hello, ${name}`;
 
 console.log(greeting)
+
+// Callback function
+
+
+
+
+
+
+// ---------------
+// PROMISES
+// ---------------
+
+const cart = ["shoes", "pan", "necklace"]
+
+const promise = createOrder(cart);
+
+promise
+    .then(function (orderId) {
+        proceedToPayment(orderId);
+    }).then(function (paymentInfo) {
+        showSummaryInfo(paymentInfo);
+    }).catch(function (err) {
+        console.log(err.message);
+    })
+
+function createOrder(cart) {
+    return new Promise(function (resolve, reject) {
+        if (!validateCart(cart)) {
+            const err = new Error("Cart is not valid");
+            reject(err);
+        }
+
+        const orderId = 12345
+
+        if (orderId) {
+            setTimeout(() => {
+                resolve(orderId);
+            }, 3000);
+        }
+    })
+}
+
+function validateCart(cart) {
+    return true;
+}
+
+function proceedToPayment(orderId) {
+    console.log(orderId + "-> do the payment");
+    return 11
+}
+
+function showSummaryInfo(paymentInfo) {
+    console.log("this is your summary");
+}
